@@ -1,7 +1,4 @@
 # Cryptography-Exercise
-Χρησιμοποιείστε **3** διαφορετικές βιβλιοθήκες για να παράγετε κλειδιά **RSA** (π.χ. 
-* OpenSSL https://github.com/openssl/openssl
-* wolfSSL https://github.com/wolfSSL/wolfssl
-* Bouncy Castle https://www.bouncycastle.org/
-* NaCL https://nacl.cr.yp.to/features.html 
-<br> κτλ) και κρατείστε το **ιδιωτικό κλειδί** ώστε να μελετήσετε τα **p,q,n**. <br><br>Υπάρχει τρόπος να διαχωρίσετε απο ποια βιβλιοθήκη έχει δημιουργηθεί το κάθε κλειδί; <br>Ένα πολύ καλό παράδειγμα με την δυαδική αναπαράσταση δίνεται στο https://www.usenix.org/system/files/conference/usenixsecurity16/sec16_paper_svenda.pdf
+Προσπαθείστε να μαζέψετε ιδιωτικά κλειδιά που έχουν ξεχαστεί στο Github όταν οι προγραμματιστές κάνουν commit τον κώδικά τους. 
+To truffleHog (https://github.com/dxa4481/truffleHog) μπορεί να σας βοηθείσει. 
+Σκοπός σας είναι να φτιάξετε ένα πρόγραμμα το οποίο θα μαζεύει repositories για έλεγχο και στην συνέχεια να το επεξεργαζόσαστε με το truffleHog για να μαζέψετε τα κλειδιά. 
