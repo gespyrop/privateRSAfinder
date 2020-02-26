@@ -3,7 +3,7 @@ from json import load
 from sys import argv, path
 
 git_url = argv[1] if len(argv) > 1 else input("\nInsert git url: ")
-repoStrings = truffleHog.find_strings(git_url)
+repoStrings = truffleHog.find_strings(git_url, do_regex=True)
 issues = repoStrings['foundIssues']
 
 def cleanRSA(rsa):
@@ -16,7 +16,8 @@ def cleanRSA(rsa):
 for issue in issues:
     with open(issue) as json_data:
         json = load(json_data)
-        if('-----BEGIN RSA PRIVATE KEY-----' in json['diff'] or '-----END RSA PRIVATE KEY-----' in json['diff']):
-            print(f'\n{110*"-"}\nRSA private key found in {git_url + ("/" if git_url[-1] != "/" else "") + json["path"]} on branch {json["branch"]}\nCommit hash: {json["commitHash"]}\n')
-            for line in cleanRSA(json['stringsFound']):
+
+        if(json['reason'] == 'RSA private key'):
+            print(f'\n{110*"-"}\nRSA private key found in {git_url + ("/" if git_url[-1] != "/" else "") + json["path"]} on branch {json["branch"]}\nCommit hash: {json["commitHash"]}\nDate:{json["date"]}\n')
+            for line in cleanRSA(json['diff'].split("\n")[1:-1]):
                 print(line)
