@@ -19,5 +19,8 @@ for issue in issues:
 
         if(json['reason'] == 'RSA private key'):
             print(f'\n{110*"-"}\nRSA private key found in {git_url + ("/" if git_url[-1] != "/" else "") + json["path"]} on branch {json["branch"]}\nCommit hash: {json["commitHash"]}\nDate:{json["date"]}\n')
-            for line in cleanRSA(json['diff'].split("\n")[1:-1]):
-                print(line)
+            rsaKey = json['diff'].split('-----BEGIN RSA PRIVATE KEY-----')[1].split('-----END RSA PRIVATE KEY-----')[0]
+            rsaKey = cleanRSA(rsaKey.split('\n')[1:-1])
+            rsaKey = ['-----BEGIN RSA PRIVATE KEY-----'] + rsaKey + ['-----END RSA PRIVATE KEY-----']
+            for line in rsaKey:
+            	print(line)
