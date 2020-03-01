@@ -22,9 +22,9 @@ def cleanRSA(rsa):
 
 # Checks all the repositories in a list for private RSA keys
 def checkRepositories(git_urls):
-    for git_url in git_urls:
+    for index, git_url in enumerate(git_urls):
         try:
-            print(f'\n{110*"-"}\n\nChecking {git_url}\n')
+            print(f'\n{110*"-"}\n\nChecking {git_url}  ({index + 1}/{len(git_urls)})\n')
             repoStrings = truffleHog.find_strings(git_url, do_regex=True)
             issues = repoStrings['foundIssues']
 
@@ -36,6 +36,11 @@ def checkRepositories(git_urls):
 
                     if(json['reason'] == 'RSA private key'):
                         keysFound += 1
+
+                        # Appending key path to key_paths.txt
+                        with open(f'keys/key_paths.txt', 'a') as file:
+                            file.write(f'Commit link: {git_url}/commit/{json["commitHash"]}\nPath: {json["path"]}\n\n')
+                        
                         print(f'\nRSA private key found in {git_url + ("/" if git_url[-1] != "/" else "") + json["path"]} on branch {json["branch"]}\nCommit hash: {json["commitHash"]}\nDate:{json["date"]}\n')
                         rsaKey = json['diff'].split('-----BEGIN RSA PRIVATE KEY-----')[1].split('-----END RSA PRIVATE KEY-----')[0]
                         rsaKey = cleanRSA(rsaKey.split('\n')[1:-1])
