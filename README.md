@@ -1,4 +1,2 @@
-# Cryptography-Exercise
-Προσπαθείστε να μαζέψετε ιδιωτικά κλειδιά που έχουν ξεχαστεί στο Github όταν οι προγραμματιστές κάνουν commit τον κώδικά τους. 
-To truffleHog (https://github.com/dxa4481/truffleHog) μπορεί να σας βοηθείσει. 
-Σκοπός σας είναι να φτιάξετε ένα πρόγραμμα το οποίο θα μαζεύει repositories για έλεγχο και στην συνέχεια να το επεξεργαζόσαστε με το truffleHog για να μαζέψετε τα κλειδιά. 
+# Private RSA Finder
+This script gets 100 random repositories from GitHub API, scans for private RSA keys using truffleHog and saves the keys to separate files.
